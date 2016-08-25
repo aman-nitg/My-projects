@@ -1,0 +1,10 @@
+.bg {
+	background-image: url("../img/chef_bg.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	height: 720px;
+}
+
+body {
+	margin: 0px;
+}
