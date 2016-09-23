@@ -1,12 +1,67 @@
 <html>
 <head>
-    <title> Github | Users </title>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
-    <script src="js/app.js"></script>
+  <title> Github | Users </title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+  <script src="https://rawgithub.com/gsklee/ngStorage/master/ngStorage.js"></script>
+  <script src="https://use.fontawesome.com/5162152e3f.js"></script>
+  <script src="js/app.js"></script>
 </head>
 
-<body ng-app="githubApi" ng-controller="githubApiCtrl">
-<input type="text" ng-model="user">
-<button ng-click="addUser(user)">Search</button>
+<body ng-app="githubApi">
+<div class="container" ng-controller="githubApiCtrl">
+  <header class="app-header">
+    <h1 class="app-title">{{ appTitle }}</h1>
+  </header>
+
+  <section class="user-input">
+    <div class="input">
+      <input type="text" ng-model="user" class="" placeholder="github login">
+      <button ng-click="addUser(user)" class="">Add</button>
+    </div>
+    <hr>
+  </section>
+
+  <section class="sorting">
+    <div>
+      Sort by:
+      <button ng-click="sortBy('name')">Name
+        <span>
+          <i ng-show="parameter == 'name'" class="fa" ng-class="(reverse ? 'fa-caret-down' : 'fa-caret-up')"></i>&nbsp;&nbsp;
+        </span>
+      </button>
+
+      <button ng-click="sortBy('location')">Location
+        <span>
+          <i ng-show="parameter == 'location'" class="fa" ng-class="(reverse ? 'fa-caret-down' : 'fa-caret-up')"></i>&nbsp;&nbsp;
+        </span>
+      </button>
+
+      <button ng-click="sortBy('followers')">Followers
+        <span>
+          <i ng-show="parameter == 'followers'" class="fa" ng-class="(reverse ? 'fa-caret-down' : 'fa-caret-up')"></i>
+        </span>
+      </button>
+
+    </div>
+  </section>
+
+  <div style="display: flex; list-style-type: none; padding: 0;">
+    <div ng-repeat="user in user_info.users track by $index" style="flex: 2;">
+      <span class="close" aria-hidden=" true" ng-click="removeUser($index)">&times;</span>
+      <a href="{{user.html_url}}">
+        <div class="stamp">
+          <img ng-src="{{user.avatar_url}}" alt="aman-nitg">
+          <div class="stamp-details">
+            <h4><strong>{{user.name}}</strong></h4>
+            <p><strong>Location:</strong> {{user.location}}</p>
+            <p><strong>Followers:</strong> {{user.followers}}</p>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+</div>
 </body>
 </html>
